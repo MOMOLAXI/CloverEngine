@@ -63,13 +63,9 @@ namespace Clover
         {
             m_StartTime = Time.time;
             WorkerName = Name;
-            long startTicks = DateTime.Now.Ticks;
-
-            OnStart();
-
             Log.Info($"[{WorkerName}::Start] " +
-                     $" Time : {Time.time}s " +
-                     $" StartCost : {(DateTime.Now.Ticks - startTicks) / 10000}ms");
+                     $" Time : {Time.time}s ");
+            OnStart();
         }
 
         public void End()
