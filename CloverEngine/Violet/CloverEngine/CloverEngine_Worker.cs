@@ -134,12 +134,6 @@
         /// <returns></returns>
         public static ParallelNode Paralle(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                Log.InternalError($"sequence name is null or empty");
-                return default;
-            }
-
             return CloverWorkerLibrary.Parallel<ParallelNode>(name);
         }
 

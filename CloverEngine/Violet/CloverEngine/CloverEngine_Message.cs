@@ -22,9 +22,10 @@
         /// 广播消息
         /// </summary>
         /// <param name="id"></param>
-        public static void PublishDynamicMessage(ulong id)
+        /// <param name="args"></param>
+        public static void PublishDynamicMessage(ulong id, VarList args)
         {
-            CloverFunctionLibrary.PublishMessage(id);
+            CloverFunctionLibrary.PublishMessage(id, args);
         }
 
         /// <summary>

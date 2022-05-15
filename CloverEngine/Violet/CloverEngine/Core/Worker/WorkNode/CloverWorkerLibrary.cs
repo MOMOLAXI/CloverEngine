@@ -96,8 +96,7 @@ namespace Clover
         {
             if (string.IsNullOrEmpty(name))
             {
-                Log.InternalError("Parallel name is null or empty");
-                return default;
+                return Parallel<T>();
             }
 
             T parallel = Alloc<T>();
