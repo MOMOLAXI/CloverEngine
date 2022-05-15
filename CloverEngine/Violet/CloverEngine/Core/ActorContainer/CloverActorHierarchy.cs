@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -8,7 +8,7 @@ namespace Clover
     internal class CloverActorHierarchy : KernelUnit
     {
         const string ACTOR_NAME_FORMAT = "{0}{1}";
-        
+
         /// <summary>
         /// 当前场景
         /// </summary>
@@ -93,6 +93,26 @@ namespace Clover
                 Actor root = CreateActor(i.ToString(), Engine, i);
                 m_GlobalRoots[i] = root;
             }
+        }
+
+        /// <summary>
+        /// 获取根节点
+        /// </summary>
+        /// <param name="resType"></param>
+        /// <returns></returns>
+        public ActorID GetRootActor(EResType resType)
+        {
+            if (resType == EResType.CloverEngine)
+            {
+                return Engine.ID;
+            }
+
+            if (m_GlobalRoots.TryGetValue(resType, out Actor actor))
+            {
+                return actor.ID;
+            }
+
+            return Null.ID;
         }
 
         /// <summary>

@@ -4,10 +4,26 @@ namespace Clover
 {
     public static partial class Helper
     {
-        public static int QueryIntArgs(object[] args, int index, int defaultVal = 0)
+        public static string QueryStringArgs(string[] args, int index, string defaultVal = "")
         {
-            object obj = args.SafeGetData(index);
-            return ToInt(obj, defaultVal);
+            if (index < 0 || null == args || args.Length <= index)
+            {
+                return defaultVal;
+            }
+
+            string ret = args[index];
+            return string.IsNullOrEmpty(ret) ? defaultVal : ret;
+        }
+
+        public static string QueryStringArgs(object[] args, int index, string defaultVal = "")
+        {
+            if (index < 0 || null == args || args.Length <= index)
+            {
+                return string.Empty;
+            }
+
+            object ret = args[index];
+            return ret == null ? defaultVal : ToString(ret, defaultVal);
         }
 
         public static int QueryIntArgs(string[] args, int index, int defaultVal = 0)
@@ -17,7 +33,52 @@ namespace Clover
                 return defaultVal;
             }
 
-            return Helper.ToInt(args[index]);
+            return ToInt(args[index]);
+        }
+
+        public static int QueryIntArgs(object[] args, int index, int defaultVal = 0)
+        {
+            if (index < 0 || null == args || args.Length <= index)
+            {
+                return defaultVal;
+            }
+
+
+            object obj = args[index];
+            return obj?.ToInt(defaultVal) ?? defaultVal;
+        }
+
+        public static float QueryFloatArgs(string[] args, int index, int defaultVal = 0)
+        {
+            if (index < 0 || null == args || args.Length <= index)
+            {
+                return defaultVal;
+            }
+
+            string obj = args[index];
+            return obj?.ToFloat(defaultVal) ?? defaultVal;
+        }
+
+        public static float QueryFloatArgs(object[] args, int index, float defaultVal = 0)
+        {
+            if (index < 0 || null == args || args.Length <= index)
+            {
+                return defaultVal;
+            }
+
+            object obj = args[index];
+            return obj?.ToFloat(defaultVal) ?? defaultVal;
+        }
+
+        public static long QueryInt64Args(string[] args, int index, long defaultVal = 0)
+        {
+            if (index < 0 || null == args || args.Length <= index)
+            {
+                return defaultVal;
+            }
+
+            string obj = args[index];
+            return obj.ToLong(defaultVal);
         }
 
         public static long QueryInt64Args(object[] args, int index, long defaultVal = 0)
@@ -28,7 +89,17 @@ namespace Clover
             }
 
             object obj = args[index];
-            return ToLong(obj, defaultVal);
+            return obj.ToLong(defaultVal);
+        }
+
+        public static bool QueryBoolArgs(string[] args, int index, bool defaultVal = false)
+        {
+            if (index < 0 || null == args || args.Length <= index)
+            {
+                return defaultVal;
+            }
+
+            return ToBool(args[index]);
         }
 
         public static bool QueryBoolArgs(object[] args, int index, bool defaultVal = false)
@@ -76,27 +147,6 @@ namespace Clover
             }
 
             return defaultVal;
-        }
-
-        public static bool QueryBoolArgs(string[] args, int index, bool defaultVal = false)
-        {
-            if (index < 0 || null == args || args.Length <= index)
-            {
-                return defaultVal;
-            }
-
-            return Helper.ToBool(args[index]);
-        }
-
-        public static float QueryFloatArgs(object[] args, int index, float defaultVal = 0)
-        {
-            if (index < 0 || null == args || args.Length <= index)
-            {
-                return defaultVal;
-            }
-
-            object obj = args[index];
-            return ToFloat(obj, defaultVal);
         }
 
         /// <summary>
@@ -169,6 +219,21 @@ namespace Clover
                 uint u => u,
                 _ => defaultVal
             };
+        }
+
+        public static string ToString(object obj, string defaultValue)
+        {
+            if (obj == null)
+            {
+                return defaultValue;
+            }
+
+            if (obj is string ret)
+            {
+                return ret;
+            }
+
+            return obj.ToString();
         }
 
         public static int ToInt(this object obj, int defaultVal)

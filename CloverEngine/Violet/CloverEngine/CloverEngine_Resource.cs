@@ -1,9 +1,26 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 
 namespace Clover
 {
     public static partial class CloverEngine
     {
+        /// <summary>
+        /// 获取全局根节点
+        /// </summary>
+        /// <param name="resType"></param>
+        /// <returns></returns>
+        public static ActorID GetGlobalRootActor(EResType resType)
+        {
+            CloverActorHierarchy hierarchy = Kernel.Get<CloverActorHierarchy>();
+            if (hierarchy != null)
+            {
+                return hierarchy.GetRootActor(resType);
+            }
+
+            Log.UnexpectedError(nameof(CloverActorHierarchy));
+            return CloverActorHierarchy.Null.ID;
+        }
+
         /// <summary>
         /// 获取全局根节点
         /// </summary>
