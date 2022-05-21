@@ -49,7 +49,7 @@ namespace Clover
             CloverActorHierarchy hierarchy = Kernel.Get<CloverActorHierarchy>();
             if (hierarchy != null)
             {
-                var root = hierarchy.GetRoot(resType);
+                Transform root = hierarchy.GetRoot(resType);
                 if (root == null)
                 {
                     Log.UnexpectedError(nameof(CloverActorHierarchy));

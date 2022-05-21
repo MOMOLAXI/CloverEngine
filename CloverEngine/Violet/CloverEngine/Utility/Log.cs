@@ -1,5 +1,5 @@
-﻿﻿﻿﻿﻿using System;
-   using Debug = UnityEngine.Debug;
+﻿using System;
+using Debug = UnityEngine.Debug;
 
 namespace Clover
 {
@@ -14,11 +14,11 @@ namespace Clover
 
         Max,
     }
-    
+
     public static class Log
     {
         public static LogLevel logLevel { set; get; } = LogLevel.Max;
-        
+
         public static void LogDebug(object message)
         {
             if (logLevel < LogLevel.Debug)
@@ -79,7 +79,7 @@ namespace Clover
 
             Debug.LogError($"{CloverEngine.ENGINE_LOG_TAG}{message}");
         }
-        
+
         internal static void InternalWarning(object message)
         {
             if (logLevel < LogLevel.Warning)
@@ -96,6 +96,7 @@ namespace Clover
             {
                 return;
             }
+
             Debug.LogException(ex);
         }
 
