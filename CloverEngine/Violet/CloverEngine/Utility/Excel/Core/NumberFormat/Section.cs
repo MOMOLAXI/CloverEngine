@@ -6,7 +6,7 @@ namespace Clover
     {
         public SectionType Type { get; set; }
 
-        public Color Color { get; set; }
+        public ExcelColor ExcelColor { get; set; }
 
         public Condition Condition { get; set; }
 

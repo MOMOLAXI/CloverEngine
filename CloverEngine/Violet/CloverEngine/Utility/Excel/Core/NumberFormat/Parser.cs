@@ -13,7 +13,7 @@ namespace Clover
             bool hasGeneralPart = false;
             bool hasTextPart = false;
             Condition condition = null;
-            Color color = null;
+            ExcelColor excelColor = null;
             string token;
             List<string> tokens = new List<string>();
 
@@ -46,8 +46,8 @@ namespace Clover
                     string expression = token.Substring(1, token.Length - 2);
                     if (TryParseCondition(expression, out Condition parseCondition))
                         condition = parseCondition;
-                    else if (TryParseColor(expression, out Color parseColor))
-                        color = parseColor;
+                    else if (TryParseColor(expression, out ExcelColor parseColor))
+                        excelColor = parseColor;
                 }
                 else
                 {
@@ -121,7 +121,7 @@ namespace Clover
             return new Section()
             {
                 Type = type,
-                Color = color,
+                ExcelColor = excelColor,
                 Condition = condition,
                 Fraction = fraction,
                 Exponential = exponential,
@@ -325,7 +325,7 @@ namespace Clover
             return true;
         }
 
-        private static bool TryParseColor(string token, out Color color)
+        private static bool TryParseColor(string token, out ExcelColor excelColor)
         {
             // TODO: Color1..59
             Tokenizer tokenizer = new Tokenizer(token);
@@ -339,14 +339,14 @@ namespace Clover
                 tokenizer.ReadString("white", true) ||
                 tokenizer.ReadString("yellow", true))
             {
-                color = new Color()
+                excelColor = new ExcelColor()
                 {
                     Value = tokenizer.Substring(0, tokenizer.Position)
                 };
                 return true;
             }
 
-            color = null;
+            excelColor = null;
             return false;
         }
     }

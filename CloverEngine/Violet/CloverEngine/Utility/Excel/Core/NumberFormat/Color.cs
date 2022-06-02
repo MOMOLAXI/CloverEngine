@@ -1,6 +1,6 @@
 ﻿namespace Clover
 {
-    internal class Color
+    internal class ExcelColor
     {
         public string Value { get; set; }
     }

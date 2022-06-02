@@ -94,6 +94,11 @@
         /// </summary>
         Shader,
         
+        /// <summary>
+        /// 资源清单
+        /// </summary>
+        Catelog,
+        
         Max,
     }
 }
